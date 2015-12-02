@@ -1,0 +1,27 @@
+{
+  "name": "ShaneSpace.GameSite",
+  "description": "Jinx & Shane's Game Site",
+  "version": "1.0.0",
+  "homepage": "https://github.com/shaneray",
+  "license": "MIT",
+  "private": true,
+  "dependencies": {
+    "angular": "~1.3.0",
+    "angular-animate": "~1.3.0",
+    "angular-bootstrap": "~0.14.3",
+    "angular-cookies": "~1.4.5",
+    "angular-moment": "~0.10.3",
+    "angular-resource": "~1.3.0",
+    "angular-route": "~1.3.0",
+    "angular-snap": "~1.8.5",
+    "angularjs-camelCase-human": "~0.2.1",
+    "bootstrap": "~3.1.1",
+    "jquery": "~2.1.1",
+    "moment": "~2.10.6",
+    "signalr": "~2.2.0"
+  },
+  "resolutions": {
+    "angular": "1.4.5"
+  },
+  "devDependencies": {}
+}

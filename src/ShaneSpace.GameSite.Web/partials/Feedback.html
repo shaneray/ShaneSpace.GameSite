@@ -1,0 +1,32 @@
+﻿<div class="container-fluid">
+    <loading loadingText="Submitting Feedback..." loadingCondition="SubmittingFeedback">
+        <div class="col-md-offset-4 col-md-4">
+            <panel header="Feedback">
+                <div ng-show="FeedbackRecieved == true" class="alert alert-success">Your feedback has been recieved.  Thank you!</div>
+                Please use the form below to leave your feedback.
+                <br /><br />
+                <form name="form" ng-submit="SubmitFeedback()" novalidate>
+                    <div class="form-group">
+                        <label for="feedbackTypeDropdown">Feedback Type:</label>
+                        <select class="form-control" name="feedbackTypeDropdown" ng-model="FeedbackType" required>
+                            <option value="BugReport">Bug Report</option>
+                            <option value="FeatureRequest">Feature Request</option>
+                            <option value="Other">Other</option>
+                        </select>
+                        <div ng-show="form.$submitted || form.feedbackTypeDropdown.$dirty">
+                            <div style="color:red" ng-show="form.feedbackTypeDropdown.$error.required">Feedback type is required.</div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="feedbackTextarea">Feedback Text:</label>
+                        <textarea class="form-control" id="feedbackTextarea" placeholder="Feedback..." name="feedbackText" ng-model="FeedbackText" required></textarea>
+                        <div ng-show="form.$submitted || form.feedbackText.$dirty">
+                            <div style="color:red" ng-show="form.feedbackText.$error.required">Feedback text is required.</div>
+                        </div>
+                    </div>
+                    <input type="submit" class="btn btn-primary" value="Submit" ng-disabled="!form.$valid">
+                </form>
+            </panel>
+        </div>
+    </loading>
+</div>

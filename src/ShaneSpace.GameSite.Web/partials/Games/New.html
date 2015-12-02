@@ -1,0 +1,57 @@
+﻿<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-6 col-md-offset-3">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    New Game
+                </div>
+                <div class="panel-body">
+                    <div class="centered" ng-show="form.$submitted">
+                        <h2>Creating Game...</h2>
+                    </div>
+                    <form name="form" ng-submit="CreateGame()" novalidate ng-hide="form.$submitted">
+                        Please select from the game options below:<br />
+
+                        <h3>Options</h3>
+                        <div class="form-group">
+                            <label for="gameNameTextbox">Game Name:</label>
+                            <input class="form-control" id="gameNameTextbox" placeholder="Name" name="gameName" ng-model="GameName" required>
+                            <div ng-show="form.$submitted || form.gameName.$dirty">
+                                <div style="color:red" ng-show="form.gameName.$error.required">Game name is required.</div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="progressionModeTextbox">Progression Mode:</label>
+                            <select class="form-control" id="progressionModeTextbox" name="progressionMode" ng-model="ProgressionMode" required>
+                                <option value="RoundRobin">Round Robin</option>
+                                <option value="HostChoice">Host Choice</option>
+                            </select>
+                            <div ng-show="form.$submitted || form.progressionMode.$dirty">
+                                <div style="color:red" ng-show="form.progressionMode.$error.required">Progression mode is required.</div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="gameTypeTextbox">Game Type:</label>
+                            <select class="form-control" id="gameTypeTextbox" name="gameType" ng-model="GameType" required>
+                                <option>Dice</option>
+                            </select>
+                            <div ng-show="form.$submitted || form.gameType.$dirty">
+                                <div style="color:red" ng-show="form.gameType.$error.required">Game type is required.</div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="rulesTextArea">Rules:</label>
+                            <textarea class="form-control" id="rulesTextArea" placeholder="Game Rules"  ng-model="Rules" ></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="descriptionTextArea">Description:</label>
+                            <textarea class="form-control" id="descriptionTextArea" placeholder="Game Description" ng-model="Description" ></textarea>
+                        </div>
+                        <br />
+                        <input type="submit" class="btn btn-primary" value="Create Game" ng-disabled="!form.$valid">
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

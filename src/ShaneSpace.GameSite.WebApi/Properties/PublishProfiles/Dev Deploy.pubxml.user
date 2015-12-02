@@ -1,0 +1,238 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--
+This file is used by the publish/package process of your Web project. You can customize the behavior of this process
+by editing this MSBuild file. In order to learn more about this please visit http://go.microsoft.com/fwlink/?LinkID=208121. 
+-->
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <TimeStampOfAssociatedLegacyPublishXmlFile />
+    <_PublishTargetUrl>Z:\GameSiteAPI</_PublishTargetUrl>
+  </PropertyGroup>
+  <ItemGroup>
+    <File Include="bin/App_global.asax.compiled">
+      <publishTime>11/29/2015 17:32:21</publishTime>
+    </File>
+    <File Include="bin/App_global.asax.dll">
+      <publishTime>11/29/2015 17:32:21</publishTime>
+    </File>
+    <File Include="bin/App_Start/CustomSwaggerJavascript.js">
+      <publishTime>11/18/2015 12:21:28</publishTime>
+    </File>
+    <File Include="bin/Autofac.dll">
+      <publishTime>09/26/2015 11:37:53</publishTime>
+    </File>
+    <File Include="bin/Autofac.Integration.Owin.dll">
+      <publishTime>09/26/2015 12:28:27</publishTime>
+    </File>
+    <File Include="bin/Autofac.Integration.SignalR.dll">
+      <publishTime>11/13/2015 17:34:04</publishTime>
+    </File>
+    <File Include="bin/Autofac.Integration.WebApi.dll">
+      <publishTime>09/26/2015 11:37:54</publishTime>
+    </File>
+    <File Include="bin/Autofac.Integration.WebApi.Owin.dll">
+      <publishTime>09/26/2015 12:28:29</publishTime>
+    </File>
+    <File Include="bin/AutoMapper.dll">
+      <publishTime>11/21/2015 16:37:33</publishTime>
+    </File>
+    <File Include="bin/CommonServiceLocator.AutofacAdapter.Unofficial.dll">
+      <publishTime>10/25/2015 09:53:22</publishTime>
+    </File>
+    <File Include="bin/da/FluentValidation.resources.dll">
+      <publishTime>11/21/2015 16:36:13</publishTime>
+    </File>
+    <File Include="bin/de/FluentValidation.resources.dll">
+      <publishTime>11/21/2015 16:36:13</publishTime>
+    </File>
+    <File Include="bin/EntityFramework.dll">
+      <publishTime>10/17/2015 15:12:31</publishTime>
+    </File>
+    <File Include="bin/EntityFramework.SqlServer.dll">
+      <publishTime>10/17/2015 15:12:31</publishTime>
+    </File>
+    <File Include="bin/es/FluentValidation.resources.dll">
+      <publishTime>11/21/2015 16:36:13</publishTime>
+    </File>
+    <File Include="bin/fi/FluentValidation.resources.dll">
+      <publishTime>11/21/2015 16:36:13</publishTime>
+    </File>
+    <File Include="bin/FluentValidation.dll">
+      <publishTime>11/21/2015 16:36:13</publishTime>
+    </File>
+    <File Include="bin/fr/FluentValidation.resources.dll">
+      <publishTime>11/21/2015 16:36:13</publishTime>
+    </File>
+    <File Include="bin/it/FluentValidation.resources.dll">
+      <publishTime>11/21/2015 16:36:13</publishTime>
+    </File>
+    <File Include="bin/ko/FluentValidation.resources.dll">
+      <publishTime>11/21/2015 16:36:13</publishTime>
+    </File>
+    <File Include="bin/MediatR.dll">
+      <publishTime>10/24/2015 18:25:18</publishTime>
+    </File>
+    <File Include="bin/Microsoft.AspNet.SignalR.Core.dll">
+      <publishTime>11/08/2015 23:58:26</publishTime>
+    </File>
+    <File Include="bin/Microsoft.AspNet.SignalR.SystemWeb.dll">
+      <publishTime>11/08/2015 23:58:58</publishTime>
+    </File>
+    <File Include="bin/Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll">
+      <publishTime>09/26/2015 11:31:23</publishTime>
+    </File>
+    <File Include="bin/Microsoft.Owin.Cors.dll">
+      <publishTime>09/26/2015 11:37:10</publishTime>
+    </File>
+    <File Include="bin/Microsoft.Owin.dll">
+      <publishTime>09/26/2015 11:35:56</publishTime>
+    </File>
+    <File Include="bin/Microsoft.Owin.Host.SystemWeb.dll">
+      <publishTime>09/26/2015 12:43:39</publishTime>
+    </File>
+    <File Include="bin/Microsoft.Owin.Security.dll">
+      <publishTime>09/26/2015 11:36:34</publishTime>
+    </File>
+    <File Include="bin/Microsoft.Owin.Security.OAuth.dll">
+      <publishTime>09/26/2015 11:36:37</publishTime>
+    </File>
+    <File Include="bin/Microsoft.Practices.ServiceLocation.dll">
+      <publishTime>10/25/2015 09:53:20</publishTime>
+    </File>
+    <File Include="bin/Microsoft.Web.Infrastructure.dll">
+      <publishTime>09/26/2015 11:38:41</publishTime>
+    </File>
+    <File Include="bin/mk/FluentValidation.resources.dll">
+      <publishTime>11/21/2015 16:36:13</publishTime>
+    </File>
+    <File Include="bin/MySql.Data.dll">
+      <publishTime>10/24/2015 13:11:10</publishTime>
+    </File>
+    <File Include="bin/MySql.Data.Entity.EF6.dll">
+      <publishTime>11/15/2015 19:57:22</publishTime>
+    </File>
+    <File Include="bin/Newtonsoft.Json.dll">
+      <publishTime>10/24/2015 13:45:29</publishTime>
+    </File>
+    <File Include="bin/nl/FluentValidation.resources.dll">
+      <publishTime>11/21/2015 16:36:13</publishTime>
+    </File>
+    <File Include="bin/NLog.dll">
+      <publishTime>09/26/2015 11:38:00</publishTime>
+    </File>
+    <File Include="bin/Owin.dll">
+      <publishTime>09/26/2015 11:35:55</publishTime>
+    </File>
+    <File Include="bin/pl/FluentValidation.resources.dll">
+      <publishTime>11/21/2015 16:36:13</publishTime>
+    </File>
+    <File Include="bin/pt/FluentValidation.resources.dll">
+      <publishTime>11/21/2015 16:36:13</publishTime>
+    </File>
+    <File Include="bin/Purplelight.Framework.Autofac.Integration.WebApi.dll">
+      <publishTime>09/26/2015 11:38:01</publishTime>
+    </File>
+    <File Include="bin/roslyn/csc.exe">
+      <publishTime>09/26/2015 11:31:22</publishTime>
+    </File>
+    <File Include="bin/roslyn/Microsoft.Build.Tasks.CodeAnalysis.dll">
+      <publishTime>09/26/2015 11:31:22</publishTime>
+    </File>
+    <File Include="bin/roslyn/Microsoft.CodeAnalysis.CSharp.dll">
+      <publishTime>09/26/2015 11:31:22</publishTime>
+    </File>
+    <File Include="bin/roslyn/Microsoft.CodeAnalysis.dll">
+      <publishTime>09/26/2015 11:31:22</publishTime>
+    </File>
+    <File Include="bin/roslyn/Microsoft.CodeAnalysis.VisualBasic.dll">
+      <publishTime>09/26/2015 11:31:22</publishTime>
+    </File>
+    <File Include="bin/roslyn/Microsoft.CSharp.Core.targets">
+      <publishTime>09/26/2015 11:31:22</publishTime>
+    </File>
+    <File Include="bin/roslyn/Microsoft.VisualBasic.Core.targets">
+      <publishTime>09/26/2015 11:31:22</publishTime>
+    </File>
+    <File Include="bin/roslyn/System.Collections.Immutable.dll">
+      <publishTime>09/26/2015 11:31:23</publishTime>
+    </File>
+    <File Include="bin/roslyn/System.Reflection.Metadata.dll">
+      <publishTime>09/26/2015 11:31:23</publishTime>
+    </File>
+    <File Include="bin/roslyn/vbc.exe">
+      <publishTime>09/26/2015 11:31:23</publishTime>
+    </File>
+    <File Include="bin/roslyn/VBCSCompiler.exe">
+      <publishTime>09/26/2015 11:31:23</publishTime>
+    </File>
+    <File Include="bin/roslyn/VBCSCompiler.exe.config">
+      <publishTime>09/26/2015 11:31:23</publishTime>
+    </File>
+    <File Include="bin/ru/FluentValidation.resources.dll">
+      <publishTime>11/21/2015 16:36:13</publishTime>
+    </File>
+    <File Include="bin/ShaneSpace.Authentication.Proxy.dll">
+      <publishTime>11/18/2015 11:57:46</publishTime>
+    </File>
+    <File Include="bin/ShaneSpace.GameSite.Domain.dll">
+      <publishTime>11/29/2015 13:30:13</publishTime>
+    </File>
+    <File Include="bin/ShaneSpace.GameSite.Models.dll">
+      <publishTime>11/29/2015 13:30:13</publishTime>
+    </File>
+    <File Include="bin/ShaneSpace.GameSite.WebApi.dll">
+      <publishTime>11/29/2015 17:32:11</publishTime>
+    </File>
+    <File Include="bin/sv/FluentValidation.resources.dll">
+      <publishTime>11/21/2015 16:36:13</publishTime>
+    </File>
+    <File Include="bin/Swashbuckle.Core.dll">
+      <publishTime>09/26/2015 11:38:43</publishTime>
+    </File>
+    <File Include="bin/System.Net.Http.Formatting.dll">
+      <publishTime>09/26/2015 11:31:22</publishTime>
+    </File>
+    <File Include="bin/System.Web.Cors.dll">
+      <publishTime>09/26/2015 11:40:40</publishTime>
+    </File>
+    <File Include="bin/System.Web.Http.Cors.dll">
+      <publishTime>09/26/2015 11:40:41</publishTime>
+    </File>
+    <File Include="bin/System.Web.Http.dll">
+      <publishTime>09/26/2015 11:31:22</publishTime>
+    </File>
+    <File Include="bin/System.Web.Http.Owin.dll">
+      <publishTime>09/26/2015 12:28:28</publishTime>
+    </File>
+    <File Include="bin/System.Web.Http.WebHost.dll">
+      <publishTime>09/26/2015 11:31:22</publishTime>
+    </File>
+    <File Include="bin/tr/FluentValidation.resources.dll">
+      <publishTime>11/21/2015 16:36:13</publishTime>
+    </File>
+    <File Include="packages.config">
+      <publishTime>11/21/2015 16:39:42</publishTime>
+    </File>
+    <File Include="PrecompiledApp.config">
+      <publishTime>11/29/2015 17:32:13</publishTime>
+    </File>
+    <File Include="Scripts/jquery-1.10.2.js">
+      <publishTime>10/17/2015 20:13:19</publishTime>
+    </File>
+    <File Include="Scripts/jquery-1.10.2.min.js">
+      <publishTime>10/17/2015 20:13:19</publishTime>
+    </File>
+    <File Include="Scripts/jquery-1.10.2.min.map">
+      <publishTime>10/17/2015 20:13:19</publishTime>
+    </File>
+    <File Include="Scripts/jquery.signalR-2.2.0.js">
+      <publishTime>11/08/2015 23:58:58</publishTime>
+    </File>
+    <File Include="Scripts/jquery.signalR-2.2.0.min.js">
+      <publishTime>11/08/2015 23:58:58</publishTime>
+    </File>
+    <File Include="Web.config">
+      <publishTime>11/22/2015 14:35:19</publishTime>
+    </File>
+  </ItemGroup>
+</Project>

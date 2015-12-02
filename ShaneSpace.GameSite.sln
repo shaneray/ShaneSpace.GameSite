@@ -1,0 +1,72 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.23107.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{5274FB29-CDE6-43B0-899B-F0914D8E4178}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{2751B254-F10C-44AC-A714-253D16A1DF15}"
+	ProjectSection(SolutionItems) = preProject
+		global.json = global.json
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShaneSpace.GameSite.Models", "src\ShaneSpace.GameSite.Models\ShaneSpace.GameSite.Models.csproj", "{FB312B7B-A3A6-40C3-94E6-68A779C3626C}"
+EndProject
+Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "ShaneSpace.GameSite.Web", "src\ShaneSpace.GameSite.Web\", "{34A32632-4FC7-4C1C-AB86-972C4C904750}"
+	ProjectSection(WebsiteProperties) = preProject
+		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.0"
+		Debug.AspNetCompiler.VirtualPath = "/localhost_55045"
+		Debug.AspNetCompiler.PhysicalPath = "src\ShaneSpace.GameSite.Web\"
+		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_55045\"
+		Debug.AspNetCompiler.Updateable = "true"
+		Debug.AspNetCompiler.ForceOverwrite = "true"
+		Debug.AspNetCompiler.FixedNames = "false"
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.VirtualPath = "/localhost_55045"
+		Release.AspNetCompiler.PhysicalPath = "src\ShaneSpace.GameSite.Web\"
+		Release.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_55045\"
+		Release.AspNetCompiler.Updateable = "true"
+		Release.AspNetCompiler.ForceOverwrite = "true"
+		Release.AspNetCompiler.FixedNames = "false"
+		Release.AspNetCompiler.Debug = "False"
+		VWDPort = "55045"
+		SlnRelativePath = "src\ShaneSpace.GameSite.Web\"
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShaneSpace.GameSite.WebApi", "src\ShaneSpace.GameSite.WebApi\ShaneSpace.GameSite.WebApi.csproj", "{E5E21C67-86E9-4DD1-B9E4-392B57466589}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShaneSpace.GameSite.Domain", "src\ShaneSpace.GameSite.Domain\ShaneSpace.GameSite.Domain.csproj", "{D18E5AB0-A60C-4262-B900-D901F0B8E365}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{FB312B7B-A3A6-40C3-94E6-68A779C3626C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FB312B7B-A3A6-40C3-94E6-68A779C3626C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FB312B7B-A3A6-40C3-94E6-68A779C3626C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FB312B7B-A3A6-40C3-94E6-68A779C3626C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{34A32632-4FC7-4C1C-AB86-972C4C904750}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{34A32632-4FC7-4C1C-AB86-972C4C904750}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{34A32632-4FC7-4C1C-AB86-972C4C904750}.Release|Any CPU.ActiveCfg = Debug|Any CPU
+		{34A32632-4FC7-4C1C-AB86-972C4C904750}.Release|Any CPU.Build.0 = Debug|Any CPU
+		{E5E21C67-86E9-4DD1-B9E4-392B57466589}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E5E21C67-86E9-4DD1-B9E4-392B57466589}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E5E21C67-86E9-4DD1-B9E4-392B57466589}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E5E21C67-86E9-4DD1-B9E4-392B57466589}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D18E5AB0-A60C-4262-B900-D901F0B8E365}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D18E5AB0-A60C-4262-B900-D901F0B8E365}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D18E5AB0-A60C-4262-B900-D901F0B8E365}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D18E5AB0-A60C-4262-B900-D901F0B8E365}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{FB312B7B-A3A6-40C3-94E6-68A779C3626C} = {5274FB29-CDE6-43B0-899B-F0914D8E4178}
+		{34A32632-4FC7-4C1C-AB86-972C4C904750} = {5274FB29-CDE6-43B0-899B-F0914D8E4178}
+		{E5E21C67-86E9-4DD1-B9E4-392B57466589} = {5274FB29-CDE6-43B0-899B-F0914D8E4178}
+		{D18E5AB0-A60C-4262-B900-D901F0B8E365} = {5274FB29-CDE6-43B0-899B-F0914D8E4178}
+	EndGlobalSection
+EndGlobal

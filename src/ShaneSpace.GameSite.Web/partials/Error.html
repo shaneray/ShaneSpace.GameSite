@@ -1,0 +1,18 @@
+﻿<div class="container-fluid">
+    <panel header="Error" class="panel-danger">
+        <div>An error has occured... Its probally our fault.  Sorry about that.</div>
+        <div ng-show="BadRequest != undefined && BadRequest != null">
+            <br /><strong>Details</strong><br />
+            {{BadRequest}}
+        </div>
+        <div ng-show="IsAdmin == true && ApplicationException != undefined && ApplicationException != null">
+            <br /><strong>Admin Error Details:</strong><br />
+            {{ApplicationException.Message}} {{ApplicationException.ExceptionType}}<br />
+            {{ApplicationException.ExceptionMessage}}<br />
+            {{ApplicationException.StackTrace}}
+        </div>
+        <br />
+        <button class="btn btn-primary" ng-click="GoBack()">Go Back</button>
+        <button class="btn btn-primary" ng-click="GoToDashboard()" ng-show="IsAuthenticated == true">Go to dashboard</button> 
+    </panel>
+</div>

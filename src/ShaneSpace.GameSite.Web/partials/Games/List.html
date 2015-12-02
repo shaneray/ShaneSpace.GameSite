@@ -1,0 +1,76 @@
+﻿<div class="container-fluid">
+    <loading loadingText="Loading Games..." loadingCondition="LoadingGames">
+        <panel header="Active Games" headerButtonText="Host a new game" headerButtonLink="#/games/new">
+            <div ng-show="ActiveGames.length == 0" class="centered"><strong>No active games.</strong></div>
+
+            <table class="table" ng-show="ActiveGames.length > 0">
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th>Game Name</th>
+                        <th>Game Type</th>
+                        <th>Host</th>
+                        <th>Players</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="Game in ActiveGames">
+                        <td><a class="btn btn-sm btn-primary" href="#/games/{{Game.GameId}}">View</a></td>
+                        <td>{{Game.Name}}</td>
+                        <td>{{Game.GameType | camelCaseToHuman}}<br />({{Game.ProgressionMode | camelCaseToHuman}})</td>
+                        <td>{{Game.Host.DisplayName}}</td>
+                        <td>{{Game.PlayerCount}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </panel>
+
+        <panel header="Waiting for players">
+            <div ng-show="InActiveGames.length == 0" class="centered"><strong>No inactive games.</strong></div>
+            <table class="table" ng-show="InActiveGames.length > 0">
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th>Game Name</th>
+                        <th>Game Type</th>
+                        <th>Host</th>
+                        <th>Players</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="Game in InActiveGames">
+                        <td><a class="btn btn-sm btn-primary" href="#/games/{{Game.GameId}}">View</a></td>
+                        <td>{{Game.Name}}</td>
+                        <td>{{Game.GameType | camelCaseToHuman}}<br />({{Game.ProgressionMode | camelCaseToHuman}})</td>
+                        <td>{{Game.Host.DisplayName}}</td>
+                        <td>{{Game.PlayerCount}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </panel>
+
+        <panel header="Closed Games">
+            <div ng-show="ClosedGames.length == 0" class="centered"><strong>No closed games.</strong></div>
+            <table class="table" ng-show="ClosedGames.length > 0">
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th>Game Name</th>
+                        <th>Game Type</th>
+                        <th>Host</th>
+                        <th>Players</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="Game in ClosedGames">
+                        <td><a class="btn btn-sm btn-primary" href="#/games/{{Game.GameId}}">View</a></td>
+                        <td>{{Game.Name}}</td>
+                        <td>{{Game.GameType | camelCaseToHuman}}<br />({{Game.ProgressionMode | camelCaseToHuman}})</td>
+                        <td>{{Game.Host.DisplayName}}</td>
+                        <td>{{Game.PlayerCount}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </panel>
+    </loading>
+</div>

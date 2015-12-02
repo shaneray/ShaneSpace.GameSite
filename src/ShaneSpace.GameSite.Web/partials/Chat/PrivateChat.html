@@ -1,0 +1,59 @@
+﻿<div>
+    <panel header="Private Chat" ng-show="IsHost != true && IsPlayer != true">
+        You must be a member of the game to use private chat.
+    </panel>
+</div>
+<uib-accordion close-others="true" ng-show="IsHost == true || IsPlayer == true">
+    <uib-accordion-group heading="{{Game.Host.DisplayName}} (Host)" is-open="true" ng-show="IsHost != true">
+        <form ng-submit="AddPrivateMessage(Game.Host.Id, NewPrivateMessage[Game.Host.Id])" name="messageForm">
+            <div class="chatContainer row" style="margin: 0;">
+                <table style="height: 100%; width: 100%">
+                    <tr>
+                        <td colspan="2">
+                            <div id="chatContents" style="height: 250px; overflow: auto;">
+                                <div ng-repeat="message in Game.PrivateMessages | filter: privateMessageFilter(Game.Host.Id) | orderBy:'-ComposeDate':true" on-last-repeat>
+                                    <strong>{{message.Composer.DisplayName}}:</strong> {{message.MessageContents}}
+                                    <hr style="margin-top: 5px; margin-bottom: 5px;" />
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr ng-show="IsHost == true || IsPlayer == true">
+                        <td style="padding: 10px">
+                            <input type="text" ng-model="NewPrivateMessage[Game.Host.Id]" class="form-control" style="margin-right: 10px;" required>
+                        </td>
+                        <td style="width: 1%">
+                            <input type="submit" class="btn btn-primary btn-sm pull-right" value="{{PrivateSendButtonText[player.Id] || 'Send'}}" ng-disabled="!messageForm.$valid || PrivateSendButtonText[player.Id] == 'Sending...'" />
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </form>
+    </uib-accordion-group>
+    <uib-accordion-group heading="{{player.DisplayName}}" ng-repeat="player in Game.Players" ng-show="player.Id != MyUserId">
+        <form ng-submit="AddPrivateMessage(player.Id, NewPrivateMessage[player.Id])" name="messageForm">
+            <div class="chatContainer row" style="margin: 0;">
+                <table style="height: 100%; width: 100%">
+                    <tr>
+                        <td colspan="2">
+                            <div id="chatContents" style="height: 250px; overflow: auto;">
+                                <div ng-repeat="message in Game.PrivateMessages | filter: privateMessageFilter(player.Id) | orderBy:'-ComposeDate':true" on-last-repeat>
+                                    <strong>{{message.Composer.DisplayName}}:</strong> {{message.MessageContents}}
+                                    <hr style="margin-top: 5px; margin-bottom: 5px;" />
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr ng-show="IsHost == true || IsPlayer == true">
+                        <td style="padding: 10px">
+                            <input type="text" ng-model="NewPrivateMessage[player.Id]" class="form-control" style="margin-right: 10px;" required>
+                        </td>
+                        <td style="width: 1%">
+                            <input type="submit" class="btn btn-primary btn-sm pull-right" value="{{PrivateSendButtonText[player.Id] || 'Send'}}" ng-disabled="!messageForm.$valid || PrivateSendButtonText[player.Id] == 'Sending...'" />
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </form>
+    </uib-accordion-group>
+</uib-accordion>

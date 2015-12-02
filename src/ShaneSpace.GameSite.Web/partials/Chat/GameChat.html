@@ -1,0 +1,39 @@
+﻿<div class="panel panel-default">
+    <div class="panel-heading">
+        Game Chat <span id="unreadLink" ng-click="ScrollChat()" ng-show="unreadMessageCount != 0" class="pull-right">Unread <span class="badge">{{unreadMessageCount}}</span></span>
+        <p class="pull-right visible-xs">
+            <button type="button" class="btn btn-default btn-xs" style="margin-right: 10px" snap-toggle="right">
+                Close Chat
+            </button>
+        </p>
+    </div>
+    <div class="panel-body">
+        <form ng-submit="AddMessage()" name="messageForm">
+            <div class="chatContainer row" style="margin: 0;">
+                <table style="height: 100%; width: 100%">
+                    <tr>
+                        <td colspan="2">
+                            <div id="chatContents" style="height: 250px; overflow: auto;">
+                                <div class="centered" ng-show="Game.Messages.length == 0">
+                                    There are currently no messages, maybe you should add one...
+                                </div>
+                                <div ng-repeat="message in Game.Messages | orderBy:'-ComposeDate':true" on-last-repeat>
+                                    <strong>{{message.Composer.DisplayName}}:</strong> {{message.MessageContents}}
+                                    <hr style="margin-top: 5px; margin-bottom: 5px;" />
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr ng-show="IsHost == true || IsPlayer == true">
+                        <td style="padding: 10px">
+                            <input type="text" ng-model="$parent.NewMessage" class="form-control" style="margin-right: 10px;" required>
+                        </td>
+                        <td style="width: 1%">
+                            <input type="submit" class="btn btn-primary btn-sm pull-right" value="{{SendButtonText}}" ng-disabled="!messageForm.$valid || SendButtonText == 'Sending...'" />
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </form>
+    </div>
+</div>

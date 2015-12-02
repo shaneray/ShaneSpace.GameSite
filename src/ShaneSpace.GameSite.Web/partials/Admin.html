@@ -1,0 +1,43 @@
+﻿<div class="container-fluid">
+    <loading loadingText="Loading admin data..." loadingCondition="LoadingUsers && LoadingFeedback">
+        <panel header="Users">
+            <div ng-show="ActiveUsers.length == 0" class="centered"><strong>No active users.</strong></div>
+
+            <table class="table" ng-show="ActiveUsers.length > 0">
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Username</th>
+                        <th>Email</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="User in ActiveUsers">
+                        <td>{{User.Id}}</td>
+                        <td>{{User.DisplayName}}</td>
+                        <td>{{User.Email}}</td>
+                </tbody>
+            </table>
+        </panel>
+        <panel header="Feedback">
+            <div class="centered" ng-show="Feedback.length == 0">
+                <strong>There is currently no feedback.</strong>
+            </div>
+                <table class="table"ng-show="Feedback.length > 0">
+                    <thead>
+                        <tr>
+                            <th width="125px">Username</th>
+                            <th width="125px">Feedback Type</th>
+                            <th>Feedback Text</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="FeedbackItem in Feedback">
+                            <td>{{FeedbackItem.User.DisplayName}}</td>
+                            <td>{{FeedbackItem.FeedbackType}}</td>
+                            <td>{{FeedbackItem.FeedbackText}}</td>
+                    </tbody>
+                </table>
+        </panel>
+    </loading>
+</div>

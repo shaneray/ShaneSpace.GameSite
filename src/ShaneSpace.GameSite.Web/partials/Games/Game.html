@@ -1,0 +1,172 @@
+﻿<div class="container-fluid" style="background-color: green" snap-content>
+    <loading loadingText="Loading Game Info..." loadingCondition="GameLoading">
+        <div class="row">
+            <div class="col-md-3 visible-md visible-lg">
+                <div ng-include="'partials/Chat/PrivateChat.html'"></div>
+            </div>
+            <div class="col-md-6">
+                <span class="visible-sm visible-xs" style="color: white;"><strong>{{Game.Name}}</strong></span>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <span class="pull-left visible-sm visible-xs">
+                            <button type="button" class="btn btn-default btn-xs" style="margin-right: 10px" snap-toggle="left">
+                                Private Chat
+                            </button>
+                        </span>
+                        <span class="pull-left visible-md visible-lg">{{Game.Name}}</span>&nbsp;
+                        
+                        <span ng-show="IsHost == true">(Host)</span>
+                        <span class="pull-right visible-sm visible-xs">
+                            <button type="button" class="btn btn-default btn-xs" style="margin-right: 10px" snap-toggle="right">
+                                Game Chat
+                            </button>
+                        </span>
+                        
+                    </div>
+                    <div class="panel-body">
+                        
+                        <ul class="nav nav-tabs">
+                            <li class="active"><a data-toggle="tab" ng-click="SetActiveTab('PlayArea')">Play Area</a></li>
+                            <li><a data-toggle="tab" ng-click="SetActiveTab('GameInfo')">Game Info</a></li>
+                            <li><a data-toggle="tab" ng-click="SetActiveTab('Players')">Players</a></li>
+                            <li ng-show="IsHost == true"><a data-toggle="tab" ng-click="SetActiveTab('HostOptions')">Host Options</a></li>
+                        </ul>
+
+                        <div class="gameTabContent tab-content">
+                            
+                            <div ng-switch="ActiveTab">
+                                <div ng-switch-when="PlayArea">
+                                    <span class="pull-right" style="margin-top: 5px;">
+                                        <button ng-disabled="JoinGameButtonText != 'Join Game'" ng-show="IsHost != true && IsPlayer != true" ng-click="JoinGame()" type="button" class="btn btn-primary btn-xs" style="margin-right: 10px">
+                                            {{JoinGameButtonText}}
+                                        </button>
+                                        <button ng-disabled="LeaveGameButtonText != 'Leave Game'" ng-show="IsHost != true && IsPlayer == true" ng-click="LeaveGame()" type="button" class="btn btn-primary btn-xs" style="margin-right: 10px">
+                                            {{LeaveGameButtonText}}
+                                        </button>
+                                    </span>
+                                    <div class="well centered">
+                                        <div ng-switch="PlayArea">
+                                            
+                                            <div ng-switch-when="WaitingForPlayers" class="centered">
+                                                <h2>Waiting for more players to join<span ng-show="Game.Players.length > 1">, or for the host to start the game</span>...</h2>
+                                                <span ng-show="Game.Players.length > 1 && IsHost == true">
+                                                    <button class="btn btn-primary" ng-click="StartGame()">Start Game</button>
+                                                </span>
+                                            </div>
+                                            <div ng-switch-when="WaitingForHost" class="centered">
+                                                <h2 ng-show="IsHost != true">Waiting for host to select next player...</h2>
+                                                <div ng-show="IsHost == true">
+                                                    <form ng-submit="HostChosePlayer()" name="form" novalidate>
+                                                        <h2>Waiting for you to select the next player...</h2>
+                                                        Player: <select ng-options="player.DisplayName for player in Game.Players" ng-model="Game.CurrentPlayer" required></select>
+                                                        <br /><br />
+                                                        <input type="submit" class="btn btn-primary" value="Select Next Player" ng-disabled="!form.$valid">
+                                                    </form>
+                                                </div>
+
+                                            </div>
+                                            <div ng-switch-when="WaitingForPlayer" class="centered">
+                                                <h2>Waiting for player "{{Game.CurrentPlayer.DisplayName}}" to make a move...</h2>
+                                                <div class="row">
+                                                    <div ng-repeat="die in CurrentPlayerDie" style="float: left;">
+                                                        <img style="width: 100px" class="currentPlayerDie" src="../../images/die/D{{die.DieSideCount}}.gif" />
+                                                        <div>D{{die.DieSideCount}}</div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div ng-switch-when="CurrentPlayerRolling" class="centered">
+                                                <h2>Rolling...</h2>
+                                                <div class="row">
+                                                    <div ng-repeat="die in DieArray" style="float: left;">
+                                                        <img style="width: 100px" class="currentPlayerDie spinEffect" src="../../images/die/D{{die.DieSideCount}}.gif" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div ng-switch-when="WaitingForYou" class="centered">
+                                                <h4>Everyone is waiting for you to make a move...</h4>
+                                                Number of Die:
+                                                <select ng-change="UpdateDieArray()" ng-model="$parent.$parent.DieCount" ng-options="i for i in range(MaxDieCount)"></select><br />
+
+                                                <div class="row">
+                                                    <div ng-repeat="x in DieArray track by $index">
+                                                        <div style="height: 70px; width: 70px; margin: 4px; padding: 4px; border: 1px solid black;" class="col-xs-1 centered">
+                                                            Die #{{$index + 1}}<br />
+                                                            Sides:
+                                                            <select ng-change="UpdateDieArray()" ng-model="x.DieSideCount" ng-options="i for i in DieSides"></select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <button ng-click="RollDie()" class="btn btn-primary">Roll Die</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <strong>History</strong>
+                                    <div class="img-rounded" style="padding: 8px; max-height: 370px; overflow: auto; border: 1px solid #e3e3e3;">
+                                        <div class="" ng-repeat="action in Game.Actions | orderBy:'-GameActionId'">
+                                            <div style="display: inline">
+                                                <img class="gravatar img-rounded pull-left" src="http://www.gravatar.com/avatar/00000000000000000000000000000000?d=mm&amp;f=y" height="40">
+                                            </div>
+                                            <div style="margin-left: 46px; padding-left: 8px;">
+                                                <strong>{{action.User.DisplayName}}</strong><span class="date" am-time-ago="action.DateTime"></span>
+                                            </div>
+                                            <div style="margin-left: 46px;padding: 5px;" class="well well-sm">
+                                                <span ng-bind-html="action.ActionValue | replaceDieWithImage"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div ng-switch-when="GameInfo">
+                                    <strong>Host</strong>
+                                    <div class="well well-sm">
+                                        {{Game.Host.DisplayName}}
+                                    </div>
+                                    <strong>Status</strong>
+                                    <div class="well well-sm">
+                                        {{Game.Status | camelCaseToHuman}}
+                                    </div>
+                                    <strong>Progression Mode</strong>
+                                    <div class="well well-sm">
+                                        {{Game.ProgressionMode | camelCaseToHuman}}
+                                    </div>
+                                    <strong>Description</strong>
+                                    <div class="well well-sm">
+                                        {{Game.Description}}
+                                    </div>
+                                    <strong>Rules</strong>
+                                    <div class="well well-sm">
+                                        {{Game.Rules}}
+                                    </div>
+                                </div>
+                                <div ng-switch-when="Players">
+                                    <div class="centered" ng-show="Game.Players.length == 0">
+                                        <strong>There is currently no players in this game.</strong>
+                                    </div>
+                                    <div ng-repeat="player in Game.Players">
+                                        {{player.DisplayName}}
+                                    </div>
+                                </div>
+                                <div ng-switch-when="HostOptions">
+                                    This tab should only be visible to the host.
+                                    <br />Will have options to close the game and maybe other stuff
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 visible-md visible-lg">
+                <div ng-include="'partials/Chat/GameChat.html'"></div>
+            </div>
+        </div>
+    </loading>
+</div>
+
+<snap-drawers>
+    <snap-drawer>
+        <div ng-include="'partials/Chat/PrivateChat.html'"></div>
+    </snap-drawer>
+    <div snap-drawer="right">
+        <div ng-include="'partials/Chat/GameChat.html'"></div>
+    </div>
+</snap-drawers>

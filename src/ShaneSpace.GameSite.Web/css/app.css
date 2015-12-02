@@ -1,0 +1,174 @@
+﻿body {
+    background-color: green;
+    padding-top: 0px;
+    font-size: 14px;
+}
+
+html {
+    height: 100%;
+}
+
+#container {
+    height: 100%;
+    top: 0;
+    position: absolute;
+    padding-top: 75px;
+    width: 100%;
+}
+
+.rolledDieImage {
+    position: relative;
+    width: 40px;
+    z-index: 1;
+    margin-bottom: 10px;
+}
+
+.dieText {
+    position: absolute;
+    width: 40px;
+    top: -3px;
+    left: 0;
+    z-index: 2;
+    line-height: 18px;
+    font-size: 15px;
+    text-shadow: 0 0 10px #fff,
+     -1px -1px 0 #fff,  
+      1px -1px 0 #fff,
+      -1px 1px 0 #fff,
+       1px 1px 0 #fff;
+}
+
+snap-content,
+[snap\:content],
+[snap-content],
+[data-snap-content],
+[x-snap-content],
+.snap-content,
+.x-snap-content,
+snap-drawers,
+[snap\:drawers],
+[snap-drawers],
+[data-snap-drawers],
+[x-snap-drawers],
+.snap-drawers,
+.x-snap-drawers,
+.snap-drawers,
+.snap-content {
+    top: 60px;
+}
+
+.nav, .pagination, .carousel, .panel-title a { cursor: pointer; }
+
+.snap-drawer-right {
+    padding-right: 10px;
+}
+
+.snap-drawer-left {
+    padding-left: 10px;
+}
+.chatContainer {
+    position: relative;
+    min-height: 300px;
+}
+
+input[type="checkbox"], input[type="radio"] {
+    margin: 0;
+    width: 34px;
+}
+
+.loadingDiv {
+    text-align: center;
+}
+
+.centered {
+    text-align: center;
+}
+.nav-tabs>li>a {
+    border-color: #ddd;
+    background-color: #f5f5f5;
+    cursor: pointer;
+    padding: 5px;
+}
+
+.gameTabContent {
+    padding: 10px; 
+    background-color: white;
+    border-right: 1px solid #ddd;
+    border-left: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
+}
+
+#unreadLink {
+    cursor: pointer;
+}
+
+#unreadLink .badge {
+    background-color: red;
+}
+.date {
+    font-size: 10px;
+    padding-left: 8px;
+}
+
+.gameActivity {
+
+}
+
+.spinEffect {
+    -webkit-animation: spin 1s infinite linear;
+    -moz-animation: spin 1s infinite linear;
+    -o-animation: spin 1s infinite linear;
+    animation: spin 1s infinite linear;
+}
+
+@-webkit-keyframes spin {
+    0% {
+        -webkit-transform: rotate(0);
+        -moz-transform: rotate(0);
+        -ms-transform: rotate(0);
+        -o-transform: rotate(0);
+        transform: rotate(0);
+    }
+
+    100% {
+        -webkit-transform: rotate(360deg);
+        -moz-transform: rotate(360deg);
+        -ms-transform: rotate(360deg);
+        -o-transform: rotate(360deg);
+        transform: rotate(360deg);
+    }
+}
+
+@-moz-keyframes spin {
+    0% {
+        -webkit-transform: rotate(0);
+        -moz-transform: rotate(0);
+        -ms-transform: rotate(0);
+        -o-transform: rotate(0);
+        transform: rotate(0);
+    }
+    100% {
+        -webkit-transform: rotate(360deg);
+        -moz-transform: rotate(360deg);
+        -ms-transform: rotate(360deg);
+        -o-transform: rotate(360deg);
+        transform: rotate(360deg);
+    }   
+}
+
+@keyframes spin {
+    0% {
+        -webkit-transform: rotate(0);
+        -moz-transform: rotate(0);
+        -ms-transform: rotate(0);
+        -o-transform: rotate(0);
+        transform: rotate(0);
+    }
+    100% {
+        -webkit-transform: rotate(360deg);
+        -moz-transform: rotate(360deg);
+        -ms-transform: rotate(360deg);
+        -o-transform: rotate(360deg);
+        transform: rotate(360deg);
+    }   
+}

@@ -1,0 +1,14 @@
+{
+  "name": "shanespace.gamesite.web",
+  "version": "1.0.0",
+  "description": "Jinx & Shane's Game Site",
+  "devDependencies": {
+    "grunt": "^0.4.5",
+    "grunt-swagger-js-codegen": "^0.4.4",
+    "lodash": "^3.10.1",
+    "matchdep": "~0.3.0",
+    "q": "^1.4.1",
+    "request": "^2.65.0",
+    "swagger-js-codegen": "^1.1.5"
+  }
+}
