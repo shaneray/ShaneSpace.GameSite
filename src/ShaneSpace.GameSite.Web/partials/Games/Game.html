@@ -10,7 +10,9 @@
                     <div class="panel-heading">
                         <span class="pull-left visible-sm visible-xs">
                             <button type="button" class="btn btn-default btn-xs" style="margin-right: 10px" snap-toggle="left">
-                                Private Chat
+                                <span id="unreadLink" class="pull-right">
+                                    Private Chat <span class="badge" ng-show="PrivateChatUnreadMessageCountTotal != 0">{{PrivateChatUnreadMessageCountTotal}}</span>
+                                </span>
                             </button>
                         </span>
                         <span class="pull-left visible-md visible-lg">{{Game.Name}}</span>&nbsp;
@@ -18,7 +20,7 @@
                         <span ng-show="IsHost == true">(Host)</span>
                         <span class="pull-right visible-sm visible-xs">
                             <button type="button" class="btn btn-default btn-xs" style="margin-right: 10px" snap-toggle="right">
-                                Game Chat
+                                 Game Chat <span class="badge" style="background-color: red;" ng-show="GameChatUnreadMessageCount != 0">{{GameChatUnreadMessageCount}}</span>
                             </button>
                         </span>
                         

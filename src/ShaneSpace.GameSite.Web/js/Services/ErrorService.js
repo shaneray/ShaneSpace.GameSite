@@ -1,6 +1,7 @@
 ﻿angular.module("ErrorService", [])
     .config(['$httpProvider', function ($httpProvider) {
         $httpProvider.interceptors.push('errorInterceptor');
+        
     }])
     .factory('errorInterceptor', ['$q','$rootScope','$location','$cookieStore',
         function ($q, $rootScope, $location, $cookieStore) {

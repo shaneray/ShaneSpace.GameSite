@@ -239,8 +239,13 @@
     <Compile Include="Cqrs\Users\Command\CreateUserCommand.cs" />
     <Compile Include="Cqrs\Users\Query\GetUserListRequest.cs" />
     <Compile Include="GameHelpers.cs" />
+    <Compile Include="Hubs\BaseHub.cs" />
+    <Compile Include="Hubs\HubExtensions.cs" />
+    <Compile Include="Hubs\HubGroupManager.cs" />
+    <Compile Include="Hubs\HubConnectionManager.cs" />
     <Compile Include="Hubs\GameHub.cs" />
     <Compile Include="Cqrs\Games\Query\GetGameListRequest.cs" />
+    <Compile Include="Hubs\GameHubClientMessageType.cs" />
     <Compile Include="ViewModels\Feedback\FeedbackViewModel.cs" />
     <Compile Include="ViewModels\Games\GameActionViewModel.cs" />
     <Compile Include="ViewModels\Games\GameSummaryViewModel.cs" />

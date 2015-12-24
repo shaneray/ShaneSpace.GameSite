@@ -1,6 +1,6 @@
 ﻿<div class="panel panel-default">
     <div class="panel-heading">
-        Game Chat <span id="unreadLink" ng-click="ScrollChat()" ng-show="unreadMessageCount != 0" class="pull-right">Unread <span class="badge">{{unreadMessageCount}}</span></span>
+        Game Chat <span id="unreadLink" ng-click="ScrollChat()" ng-show="GameChatUnreadMessageCount != 0" class="pull-right">Unread <span class="badge">{{GameChatUnreadMessageCount}}</span></span>
         <p class="pull-right visible-xs">
             <button type="button" class="btn btn-default btn-xs" style="margin-right: 10px" snap-toggle="right">
                 Close Chat
@@ -13,11 +13,11 @@
                 <table style="height: 100%; width: 100%">
                     <tr>
                         <td colspan="2">
-                            <div id="chatContents" style="height: 250px; overflow: auto;">
+                            <div class="GameChatContents" style="height: 250px; overflow: auto;">
                                 <div class="centered" ng-show="Game.Messages.length == 0">
                                     There are currently no messages, maybe you should add one...
                                 </div>
-                                <div ng-repeat="message in Game.Messages | orderBy:'-ComposeDate':true" on-last-repeat>
+                                <div id="GameChat" ng-repeat="message in Game.Messages | orderBy:'-ComposeDate':true" on-last-repeat>
                                     <strong>{{message.Composer.DisplayName}}:</strong> {{message.MessageContents}}
                                     <hr style="margin-top: 5px; margin-bottom: 5px;" />
                                 </div>

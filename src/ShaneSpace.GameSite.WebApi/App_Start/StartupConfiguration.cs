@@ -92,6 +92,7 @@ namespace ShaneSpace.GameSite.WebApi.App_Start
             });
 
             var container = builder.Build();
+            
 
             config.DependencyResolver = new AutofacWebApiDependencyResolver(container);
             return container;

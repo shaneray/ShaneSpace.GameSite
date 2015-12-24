@@ -8,4 +8,5 @@
 **/bower_components
 **/node_modules
 **/*.csproj.user
-.vs
+/.vs
+**/PrecompiledWeb

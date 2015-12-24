@@ -1,13 +1,15 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.23107.0
+VisualStudioVersion = 14.0.24720.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{5274FB29-CDE6-43B0-899B-F0914D8E4178}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{2751B254-F10C-44AC-A714-253D16A1DF15}"
 	ProjectSection(SolutionItems) = preProject
+		.gitignore = .gitignore
 		global.json = global.json
+		README.md = README.md
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShaneSpace.GameSite.Models", "src\ShaneSpace.GameSite.Models\ShaneSpace.GameSite.Models.csproj", "{FB312B7B-A3A6-40C3-94E6-68A779C3626C}"

@@ -4,14 +4,23 @@
     </panel>
 </div>
 <uib-accordion close-others="true" ng-show="IsHost == true || IsPlayer == true">
-    <uib-accordion-group heading="{{Game.Host.DisplayName}} (Host)" is-open="true" ng-show="IsHost != true">
+    <uib-accordion-group is-open="PrivateChatOpen[Game.Host.Id]" is-disabled="PrivateChatOpen[Game.Host.Id]" ng-show="IsHost != true">
+        <uib-accordion-heading>
+            <div ng-click="PrivateChatOpened(Game.Host.Id)">
+                {{Game.Host.DisplayName}} (Host)
+                <span id="unreadLink" class="pull-right">
+                    <span class="badge" ng-show="PrivateChatUnreadMessageCount['Private' + Game.Host.Id + 'Container'] != 0">{{PrivateChatUnreadMessageCount['Private' + Game.Host.Id + 'Container']}}</span>
+                </span>
+            </div>
+
+        </uib-accordion-heading>
         <form ng-submit="AddPrivateMessage(Game.Host.Id, NewPrivateMessage[Game.Host.Id])" name="messageForm">
             <div class="chatContainer row" style="margin: 0;">
                 <table style="height: 100%; width: 100%">
                     <tr>
                         <td colspan="2">
-                            <div id="chatContents" style="height: 250px; overflow: auto;">
-                                <div ng-repeat="message in Game.PrivateMessages | filter: privateMessageFilter(Game.Host.Id) | orderBy:'-ComposeDate':true" on-last-repeat>
+                            <div class="PrivateChatContents Private{{Game.Host.Id}}Container" id="Private{{Game.Host.Id}}Container" style="height: 250px; overflow: auto;">
+                                <div id="Private{{Game.Host.Id}}" ng-repeat="message in Game.PrivateMessages | filter: privateMessageFilter(Game.Host.Id) | orderBy:'-ComposeDate':true" on-last-repeat>
                                     <strong>{{message.Composer.DisplayName}}:</strong> {{message.MessageContents}}
                                     <hr style="margin-top: 5px; margin-bottom: 5px;" />
                                 </div>
@@ -30,14 +39,22 @@
             </div>
         </form>
     </uib-accordion-group>
-    <uib-accordion-group heading="{{player.DisplayName}}" ng-repeat="player in Game.Players" ng-show="player.Id != MyUserId">
+    <uib-accordion-group ng-repeat="player in Game.Players | orderBy:'-DisplayName'" is-open="PrivateChatOpen[player.Id]" is-disabled="PrivateChatOpen[player.Id]" ng-show="player.Id != MyUserId">
+        <uib-accordion-heading>
+            <div ng-click="PrivateChatOpened(player.Id)">
+                {{player.DisplayName}}
+                <span id="unreadLink" class="pull-right">
+                    <span class="badge" ng-show="PrivateChatUnreadMessageCount['Private' + player.Id + 'Container'] != 0">{{PrivateChatUnreadMessageCount['Private' + player.Id + 'Container']}}</span>
+                </span>
+            </div>
+        </uib-accordion-heading>
         <form ng-submit="AddPrivateMessage(player.Id, NewPrivateMessage[player.Id])" name="messageForm">
             <div class="chatContainer row" style="margin: 0;">
                 <table style="height: 100%; width: 100%">
                     <tr>
                         <td colspan="2">
-                            <div id="chatContents" style="height: 250px; overflow: auto;">
-                                <div ng-repeat="message in Game.PrivateMessages | filter: privateMessageFilter(player.Id) | orderBy:'-ComposeDate':true" on-last-repeat>
+                            <div class="PrivateChatContents Private{{player.Id}}Container" id="Private{{player.Id}}Container" style="height: 250px; overflow: auto;">
+                                <div id="Private{{player.Id}}" ng-repeat="message in Game.PrivateMessages | filter: privateMessageFilter(player.Id) | orderBy:'-ComposeDate':true" on-last-repeat>
                                     <strong>{{message.Composer.DisplayName}}:</strong> {{message.MessageContents}}
                                     <hr style="margin-top: 5px; margin-bottom: 5px;" />
                                 </div>

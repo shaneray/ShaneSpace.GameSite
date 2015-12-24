@@ -1,12 +1,10 @@
 ﻿using Autofac;
 using MediatR;
 using Microsoft.AspNet.SignalR;
-using ShaneSpace.GameSite.Domain;
 using ShaneSpace.GameSite.Domain.Data;
 using ShaneSpace.GameSite.Models;
 using ShaneSpace.GameSite.WebApi.Cqrs.Games.Command;
 using ShaneSpace.GameSite.WebApi.ViewModels;
-using System.Diagnostics;
 using System.Threading.Tasks;
 using System.Data.Entity;
 using System.Linq;
@@ -15,19 +13,12 @@ using System;
 namespace ShaneSpace.GameSite.WebApi.Hubs
 {
     [Authorize]
-    public class GameHub : Hub
+    public class GameHub : BaseHub<GameHub>
     {
-        private User _user;
         private readonly CoreContext _context;
-        private readonly ILifetimeScope _hubLifetimeScope;
-        private readonly IMediator _mediator;
-        private readonly IUserMappingService _userMappingService;
 
-        public GameHub(ILifetimeScope lifetimeScope)
+        public GameHub(ILifetimeScope lifetimeScope) : base(lifetimeScope)
         {
-            _hubLifetimeScope = lifetimeScope.BeginLifetimeScope();
-            _mediator = _hubLifetimeScope.Resolve<IMediator>();
-            _userMappingService = _hubLifetimeScope.Resolve<IUserMappingService>();
             _context = _hubLifetimeScope.Resolve<CoreContext>();
         }
 
@@ -38,10 +29,21 @@ namespace ShaneSpace.GameSite.WebApi.Hubs
             var gameId = $"Game{Context.QueryString["gameId"]}";
             var userId = $"{gameId}User{_user.Id}";
 
-            await Groups.Add(Context.ConnectionId, gameId);
-            await Groups.Add(Context.ConnectionId, userId);
-
+            JoinGroup(gameId);
+            JoinGroup(userId);
             await base.OnConnected();
+        }
+
+        public override Task OnReconnected()
+        {
+            GetUser();
+
+            var gameId = $"Game{Context.QueryString["gameId"]}";
+            var userId = $"{gameId}User{_user.Id}";
+
+            JoinGroup(gameId);
+            JoinGroup(userId);
+            return base.OnReconnected();
         }
 
         public async Task<MessageViewModel> CreateMessage(dynamic request)
@@ -49,14 +51,16 @@ namespace ShaneSpace.GameSite.WebApi.Hubs
             try
             {
                 GetUser();
-
+                var gameId = int.Parse(Context.QueryString["gameId"]);
                 var message = await _mediator.SendAsync(new CreateGameMessageCommand
                 {
                     ComposerId = _user.Id,
-                    GameId = int.Parse(Context.QueryString["gameId"]),
+                    GameId = gameId,
                     MessageContents = request.messageContents
                 });
-                await Clients.OthersInGroup($"Game{Context.QueryString["gameId"]}").gameMessage(message);
+                // var clientList = Clients.OthersInGroup($"Game{gameId}");
+                // await clientList.gameMessage(message);
+                await SendHubMessageToOthersInGroupAsync($"Game{gameId}", GameHubClientMessageType.GameMessage, message);
                 return message;
             }
             catch (Exception ex)
@@ -71,7 +75,7 @@ namespace ShaneSpace.GameSite.WebApi.Hubs
             {
                 GetUser();
                 var gameId = $"Game{Context.QueryString["gameId"]}";
-                var userId = $"{gameId}User{_user.Id}";
+                var recipientId = $"{gameId}User{request.RecipientId}";
                 var message = await _mediator.SendAsync(new CreatePrivateMessageCommand
                 {
                     ComposerId = _user.Id,
@@ -79,7 +83,8 @@ namespace ShaneSpace.GameSite.WebApi.Hubs
                     GameId = int.Parse(Context.QueryString["gameId"]),
                     MessageContents = request.messageContents
                 });
-                await Clients.Group(userId).privateMessage(message);
+                //await Clients.Group(userId).privateMessage(message);
+                await SendHubMessageToGroupAsync(recipientId, GameHubClientMessageType.PrivateMessage, message);
                 return message;
             }
             catch (Exception ex)
@@ -102,7 +107,8 @@ namespace ShaneSpace.GameSite.WebApi.Hubs
                 UserId = _user.Id,
                 GameId = int.Parse(Context.QueryString["gameId"])
             });
-            await Clients.OthersInGroup($"Game{gameId}").gameAction(gameAction);
+            //await Clients.OthersInGroup($"Game{gameId}").gameAction(gameAction);
+                await SendHubMessageToOthersInGroupAsync($"Game{gameId}", GameHubClientMessageType.GameAction, gameAction);
             return gameAction;
         }
 
@@ -115,13 +121,15 @@ namespace ShaneSpace.GameSite.WebApi.Hubs
                 UserId = _user.Id,
                 GameId = gameId
             });
-            await Clients.OthersInGroup($"Game{Context.QueryString["gameId"]}").gameAction(gameAction);
+            //await Clients.OthersInGroup($"Game{Context.QueryString["gameId"]}").gameAction(gameAction);
+                await SendHubMessageToOthersInGroupAsync($"Game{gameId}", GameHubClientMessageType.GameAction, gameAction);
             var game = _context.Games.Include(x => x.Players).Single(x => x.GameId == gameId);
 
             if (game.Players.Count() < 2 && game.Status != (int)GameStatus.WaitingForPlayers)
             {
                 var statusChangeAction = await _mediator.SendAsync(new AutoStatusChangeCommand { GameId = gameId });
-                await Clients.Group($"Game{Context.QueryString["gameId"]}").gameAction(statusChangeAction);
+                //await Clients.Group($"Game{Context.QueryString["gameId"]}").gameAction(statusChangeAction);
+                await SendHubMessageToGroupAsync($"Game{gameId}", GameHubClientMessageType.GameAction, statusChangeAction);
 
             }
             return gameAction;
@@ -138,7 +146,8 @@ namespace ShaneSpace.GameSite.WebApi.Hubs
             });
             foreach (var gameAction in gameActions)
             {
-                await Clients.Group($"Game{gameId}").gameAction(gameAction);
+                //await Clients.Group($"Game{gameId}").gameAction(gameAction);
+                await SendHubMessageToGroupAsync($"Game{gameId}", GameHubClientMessageType.GameAction, gameAction);
             }
         }
 
@@ -149,7 +158,8 @@ namespace ShaneSpace.GameSite.WebApi.Hubs
             var game = _context.Games.Include(x => x.CurrentGamePlayer).Single(x => x.GameId == gameId);
             if (game.CurrentGamePlayer.UserId == _user.Id)
             {
-                await Clients.OthersInGroup($"Game{gameId}").otherPlayerDieChange(request);
+                //await Clients.OthersInGroup($"Game{gameId}").otherPlayerDieChange(request);
+                await SendHubMessageToOthersInGroupAsync($"Game{gameId}", GameHubClientMessageType.OtherPlayerDieChange, request);
             }
         }
 
@@ -160,7 +170,8 @@ namespace ShaneSpace.GameSite.WebApi.Hubs
             var game = _context.Games.Include(x => x.CurrentGamePlayer).Single(x => x.GameId == gameId);
             if (game.CurrentGamePlayer.UserId == _user.Id)
             {
-                await Clients.OthersInGroup($"Game{gameId}").currentPlayerRolling(request);
+                //await Clients.OthersInGroup($"Game{gameId}").currentPlayerRolling(request);
+                await SendHubMessageToOthersInGroupAsync($"Game{gameId}", GameHubClientMessageType.CurrentPlayerRolling, request);
 
                 var gameActions = await _mediator.SendAsync(new PlayerRolledDieCommand
                 {
@@ -170,7 +181,8 @@ namespace ShaneSpace.GameSite.WebApi.Hubs
                 });
                 foreach (var gameAction in gameActions)
                 {
-                    await Clients.Group($"Game{gameId}").gameAction(gameAction);
+                    //await Clients.Group($"Game{gameId}").gameAction(gameAction);
+                await SendHubMessageToGroupAsync($"Game{gameId}", GameHubClientMessageType.GameAction, gameAction);
                 }
             }
         }
@@ -187,18 +199,9 @@ namespace ShaneSpace.GameSite.WebApi.Hubs
             });
             foreach (var gameAction in gameActions)
             {
-                await Clients.Group($"Game{gameId}").gameAction(gameAction);
+                //await Clients.Group($"Game{gameId}").gameAction(gameAction);
+                await SendHubMessageToGroupAsync($"Game{gameId}", GameHubClientMessageType.GameAction, gameAction);
             }
-        }
-
-        private void GetUser()
-        {
-            _user = _userMappingService.GetUserFromIdentity(Context.User.Identity);
-        }
-
-        public void Heartbeat()
-        {
-            Clients.All.heartbeat();
         }
 
         protected override void Dispose(bool disposing)

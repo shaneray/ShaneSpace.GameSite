@@ -6,6 +6,8 @@ using Microsoft.Owin.Security.OAuth;
 using Microsoft.AspNet.SignalR;
 using Autofac.Integration.SignalR;
 using System.Threading.Tasks;
+using Microsoft.AspNet.SignalR.Infrastructure;
+using Autofac;
 
 [assembly: OwinStartup(typeof(Startup))]
 namespace ShaneSpace.GameSite.WebApi.App_Start
@@ -28,7 +30,20 @@ namespace ShaneSpace.GameSite.WebApi.App_Start
 
             var hubConfiguration = new HubConfiguration();
             hubConfiguration.EnableDetailedErrors = true;
-            hubConfiguration.Resolver = new AutofacDependencyResolver(ConfigureAutofac(app, config, true));
+            var signalRContainer = ConfigureAutofac(app, config, true);
+            hubConfiguration.Resolver = new AutofacDependencyResolver(signalRContainer);
+            var builder = new ContainerBuilder();
+            var connManager = hubConfiguration.Resolver.Resolve<IConnectionManager>();
+            builder.RegisterInstance(connManager)
+                .As<IConnectionManager>()
+                .SingleInstance();
+            builder.Update(signalRContainer);
+
+            var builder2 = new ContainerBuilder();
+            builder2.RegisterInstance(connManager)
+                .As<IConnectionManager>()
+                .SingleInstance();
+            builder2.Update(container);
             app.MapSignalR(hubConfiguration);
         }
     }
