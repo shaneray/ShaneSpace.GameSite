@@ -36,9 +36,7 @@ namespace ShaneSpace.GameSite.WebApi.Hubs
         {
             GetUser();
             string name = _user.SingalRIdentity();
-
             _users.Add(name, Context.ConnectionId);
-
             return base.OnConnected();
         }
 
@@ -46,11 +44,8 @@ namespace ShaneSpace.GameSite.WebApi.Hubs
         {
             GetUser();
             string name = _user.SingalRIdentity();
-
             _users.Remove(name, Context.ConnectionId);
-
             _groups.LeaveAllGroups(Context.ConnectionId);
-
             return base.OnDisconnected(stopCalled);
         }
 
@@ -58,12 +53,10 @@ namespace ShaneSpace.GameSite.WebApi.Hubs
         {
             GetUser();
             string name = _user.SingalRIdentity();
-
             if (!_users.GetConnections(name).Contains(Context.ConnectionId))
             {
                 _users.Add(name, Context.ConnectionId);
             }
-
             return base.OnReconnected();
         }
 

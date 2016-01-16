@@ -18,19 +18,19 @@ angular.module("SignalRHubService", ['AuthService'])
           var disconnectedCallback = function () { };
 
           connection.connectionSlow(function () {
-              if (connection.logging == true) { onsole.log("SignalR connection SLOW."); }
+              if (connection.logging === true) { console.log("SignalR connection SLOW."); }
               connectionSlowCallback();
           });
           connection.reconnecting(function () {
-              if (connection.logging == true) { console.log("SignalR connection RECONNECTING."); }
+              if (connection.logging === true) { console.log("SignalR connection RECONNECTING."); }
               reconnectingCallback();
           });
           connection.reconnected(function () {
-              if (connection.logging == true) { console.log("SignalR connection RECONNECTED."); }
+              if (connection.logging === true) { console.log("SignalR connection RECONNECTED."); }
               reconnectedCallback();
           });
           connection.disconnected(function () {
-              if (connection.logging == true) { console.log("SignalR connection DISCONNECTED."); }
+              if (connection.logging === true) { console.log("SignalR connection DISCONNECTED."); }
               disconnectedCallback();
           });
           connection.error(function (error) {
