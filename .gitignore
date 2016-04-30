@@ -10,3 +10,5 @@
 **/*.csproj.user
 /.vs
 **/PrecompiledWeb
+/src/ShaneSpace.GameSite.HostedWebApp/bld/Release
+*.user

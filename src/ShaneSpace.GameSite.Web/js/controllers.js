@@ -1,4 +1,4 @@
-﻿var gameSiteAppControllers = angular.module('gamesiteAppControllers', ['AuthService', 'ConfigService', 'GameProxy', 'SignalRHubService']);
+﻿var gameSiteAppControllers = angular.module('gamesiteAppControllers', ['AuthService', 'ConfigService', 'GameProxy', 'SignalRHubService', 'Windows10Service']);
 
 gameSiteAppControllers.controller('RegisterController', ['$scope', 'Auth', '$rootScope', '$location',
   function ($scope, Auth, $rootScope, $location) {
@@ -133,8 +133,8 @@ gameSiteAppControllers.controller('GameListController', ['$scope', 'GameService'
       });
   }]);
 
-gameSiteAppControllers.controller('GameController', ['$scope', '$routeParams', 'GameService', 'Config', 'backendHubProxy', '$timeout', '$rootScope', 'Auth', 'snapRemote',
-  function ($scope, $routeParams, GameService, Config, backendHubProxy, $timeout, $rootScope, Auth, snapRemote) {
+gameSiteAppControllers.controller('GameController', ['$scope', '$routeParams', 'GameService', 'Config', 'backendHubProxy', '$timeout', '$rootScope', 'Auth', 'snapRemote','Win10',
+  function ($scope, $routeParams, GameService, Config, backendHubProxy, $timeout, $rootScope, Auth, snapRemote, Win10) {
 
       // Controller init
       var api = new GameService(Config.GameServiceConfig);
@@ -178,6 +178,7 @@ gameSiteAppControllers.controller('GameController', ['$scope', '$routeParams', '
               snapRemote.enable();
           }
       }
+
       function CalculateSum(obj) {
           console.log(obj);
           var sum = 0;
@@ -232,7 +233,6 @@ gameSiteAppControllers.controller('GameController', ['$scope', '$routeParams', '
               });
           });
       });
-
 
       // Game hub events
       gameHub.onConnectionSlow(function () { console.log("Realtime connection is slow"); });
